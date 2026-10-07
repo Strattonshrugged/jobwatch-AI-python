@@ -1,1 +1,70 @@
-{}
+{
+  "ai-search:connected-devices-smart-tv-stb": {
+    "dated:roku:senior software engineer in test python:cambridge england united kingdom:2026 03 13": {
+      "company": "Roku",
+      "title": "Senior Software Engineer in Test, Python",
+      "location": "Cambridge, England, United Kingdom",
+      "url": "https://www.weareroku.com/jobs/senior-software-engineer-in-test-python-cambridge-england-united-kingdom",
+      "requisition_id": null,
+      "posted_date": "2026-03-13",
+      "first_seen": "2026-10-07",
+      "match_keys": [
+        "dated:roku:senior software engineer in test python:cambridge england united kingdom:2026 03 13",
+        "url:https://www.weareroku.com/jobs/senior-software-engineer-in-test-python-cambridge-england-united-kingdom"
+      ],
+      "last_seen": "2026-10-07"
+    },
+    "url:https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-fire-tv-devices": {
+      "company": "Amazon (Fire TV)",
+      "title": "Quality Assurance Engineer, Fire TV Devices",
+      "location": "",
+      "url": "https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-fire-tv-devices/",
+      "requisition_id": null,
+      "posted_date": null,
+      "first_seen": "2026-10-07",
+      "match_keys": [
+        "url:https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-fire-tv-devices"
+      ],
+      "last_seen": "2026-10-07"
+    },
+    "url:https://www.jointaro.com/jobs/amazon/software-engineer-in-test-firetv": {
+      "company": "Amazon (Fire TV)",
+      "title": "Software Engineer In Test, FireTV",
+      "location": "",
+      "url": "https://www.jointaro.com/jobs/amazon/software-engineer-in-test-firetv/",
+      "requisition_id": null,
+      "posted_date": null,
+      "first_seen": "2026-10-07",
+      "match_keys": [
+        "url:https://www.jointaro.com/jobs/amazon/software-engineer-in-test-firetv"
+      ],
+      "last_seen": "2026-10-07"
+    },
+    "url:https://www.weareroku.com/jobs/senior-quality-assurance-engineer-shanghai-china": {
+      "company": "Roku",
+      "title": "Senior Quality Assurance Engineer",
+      "location": "Shanghai, China",
+      "url": "https://www.weareroku.com/jobs/senior-quality-assurance-engineer-shanghai-china",
+      "requisition_id": null,
+      "posted_date": null,
+      "first_seen": "2026-10-07",
+      "match_keys": [
+        "url:https://www.weareroku.com/jobs/senior-quality-assurance-engineer-shanghai-china"
+      ],
+      "last_seen": "2026-10-07"
+    },
+    "url:https://www.weareroku.com/jobs/software-engineer-test-sdet-automation-cambridge-england-united-kingdom": {
+      "company": "Roku",
+      "title": "Software Engineer, Test - SDET, Automation",
+      "location": "Cambridge, England, United Kingdom",
+      "url": "https://www.weareroku.com/jobs/software-engineer-test-sdet-automation-cambridge-england-united-kingdom",
+      "requisition_id": null,
+      "posted_date": null,
+      "first_seen": "2026-10-07",
+      "match_keys": [
+        "url:https://www.weareroku.com/jobs/software-engineer-test-sdet-automation-cambridge-england-united-kingdom"
+      ],
+      "last_seen": "2026-10-07"
+    }
+  }
+}
