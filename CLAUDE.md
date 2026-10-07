@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-`companyjobwatch` scrapes a configurable list of websites for lines matching keywords, maintains a history of found lines per site, and emails a summary whenever new matches appear. It runs on a GitHub Actions cron schedule. A second script, `job_search_ai.py`, runs alongside it and does an AI-driven web search (Claude + the web-search tool) for a job category too fuzzy for keyword matching — see its own section below.
+`jobwatch-AI-python` does an AI-driven web search (Claude + the web-search tool) for a job category too fuzzy for keyword matching, keeps a history of postings already seen, and emails a summary whenever new ones appear. It runs on a GitHub Actions cron schedule.
+
+It was split off from `companyjobwatch` (Oct 2026), which ran this script next to a keyword scraper. The scraper now lives on its own in `jobwatch-webscrape-python`. This repo keeps companyjobwatch's git history, but `history.json` was reset to `{}`: companyjobwatch's history file never held an entry for the AI search, only the scraper's per-site matches.
 
 ## Commands
 
@@ -12,169 +14,47 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # Install dependencies
 pip install -r requirements.txt
 
-# Run the scraper locally (requires env vars below)
-python scraper.py
+# Run the search locally (requires env vars below; makes a real, billed API call)
+python job_search_ai.py
 ```
 
-Required environment variables for local runs:
+Required environment variables:
 ```
-SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD, EMAIL_FROM, EMAIL_TO
+ANTHROPIC_API_KEY, SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD, EMAIL_FROM, EMAIL_TO
 ```
-
-`job_search_ai.py` additionally requires `ANTHROPIC_API_KEY`.
 
 ## Architecture
 
-All logic lives in `scraper.py`:
+All logic lives in `job_search_ai.py`:
 
-1. Loads `config.yaml` (list of sites + keywords to match)
-2. Loads `history.json` (previously found matching lines, keyed by each site's `url`)
-3. For each site: `fetch_lines_for_site()` dispatches on the site's `platform` field to get a list of text lines, then finds keyword matches
-4. Diffs current matches against history — new lines trigger an email entry, removed lines are purged from history
-5. Saves updated `history.json`
-6. If any new matches were found, sends a single SMTP email listing each affected site and its new lines
+1. Loads `history.json` (postings already seen, keyed by search)
+2. Calls the Claude API with the `web_search_20260209` server-side tool (model `claude-opus-5`, `output_config.effort: "medium"`, deliberately below the `high` default to keep a routine daily job cheap; raise it if results seem thin), asking for QA/testing postings in the connected-devices / smart-TV / set-top-box space as a JSON array of `{company, title, location, url}`. If the response stops with `pause_turn`, the request is resent (up to 5 times) so the server-side tool loop can continue.
+3. Diffs the results against history under `SEARCH_KEY = "ai-search:connected-devices-smart-tv-stb"`. New postings go into the email; postings missing from this run are removed from history.
+4. Saves updated `history.json`
+5. If anything is new, sends a single SMTP email listing it
 
-### Fetching: HTML vs. platform APIs
+History is a dict keyed by search rather than a flat list, so another search can be added later with its own key without mixing results.
 
-Many career sites are client-rendered SPAs (Workday, Greenhouse, etc.) — the raw HTML is
-an empty shell and `requests` + BeautifulSoup never sees the job listings. For those, we
-call the ATS's own JSON API directly instead of scraping rendered HTML. Site fetching is
-dispatched by `site.get("platform", "html")` in `fetch_lines_for_site()`:
+If the API call fails or the response doesn't parse as JSON (`extract_json_array` raises), the script logs to stderr and exits 1 without touching `history.json`. The workflow run goes red and the commit step is skipped. When the script still ran next to the scraper in companyjobwatch, it returned 0 here instead, so a failure couldn't block the scraper's run. Now that it runs alone, a silent pass would hide the failure. If parsing keeps failing, check the Actions log for the raw response text and tighten the prompt (e.g. the model wrapping the array in markdown fences or commentary).
 
-| `platform` | Fetcher | Required config.yaml fields |
-|---|---|---|
-| *(unset)* / `html` | `fetch_lines_html` | `url` — plain `requests` + BeautifulSoup, works when the ATS renders listings server-side |
-| `workday` | `fetch_lines_workday` | `workday_tenant`, `workday_site`; optional `workday_facets` (dict of facet-id → list, e.g. to filter by remote type / job family — inspect the site's own query params to find facet IDs) |
-| `greenhouse` | `fetch_lines_greenhouse` | `greenhouse_board`; optional `greenhouse_department` (numeric department ID, scopes to one Greenhouse department) |
-| `workable` | `fetch_lines_workable` | `workable_account` |
-| `smartrecruiters` | `fetch_lines_smartrecruiters` | `smartrecruiters_company` (note: SmartRecruiters' public API returns *all* postings for the company, not scoped to a sub-brand/business-unit page) |
-| `typesense` | `fetch_lines_typesense` | `typesense_base_url`, `typesense_api_key`, `typesense_collection`; optional `typesense_filter_by`, `typesense_title_field` (default `name`), `typesense_city_field` (default `city-2`) |
-| `algolia` | `fetch_lines_algolia` | `algolia_app_id`, `algolia_api_key`, `algolia_index`; optional `algolia_facet_filters`, `algolia_filters`, `algolia_title_field` (default `title`), `algolia_city_field` (default `primaryLocationCity`) |
-| `phenom` | `fetch_lines_phenom` | `phenom_base_url`, `phenom_domain`; optional `phenom_query`, `phenom_location` — confirmed only on newer Phenom "pcsx" widget instances (CACI); older instances (Serco) don't expose this endpoint |
-| `jibe` | `fetch_lines_jibe` | `jibe_base_url`; optional `jibe_location`, `jibe_query` — Jibe is an iCIMS-owned ATS product, distinct from classic iCIMS |
-| `playwright` | `fetch_lines_playwright` | `url`; optional `playwright_wait_ms` (default `4000`), `playwright_max_pages` (default `1`) — headless-browser fallback for sites with no discoverable public API, see below |
+**Not yet verified against the live API.** It was built and dry-run with a stub and no key (2026-09-10) in companyjobwatch, but nobody has seen it complete a real `web_search` call end to end. The first real check will be a local run with `ANTHROPIC_API_KEY` set, or the first `workflow_dispatch`/scheduled run once the secret is added, whichever comes first.
 
-Before adding a new platform fetcher, confirm the ATS actually exposes a public JSON API —
-check the site's Network tab for the XHR the frontend itself calls, and hit it directly with
-`curl` to confirm the field names before wiring it into `scraper.py`. Don't guess endpoint
-shapes. Typesense/Algolia/Phenom/Jibe search keys found this way are meant to be public
-(search-only, embedded directly in the frontend JS every visitor's browser already loads) —
-calling them directly from `scraper.py` is the same access the page itself has, not a
-credential leak. Only fall back to `platform: playwright` once that search comes up empty —
-it's meaningfully heavier (spins up a real Chromium instance per site) and more fragile than
-a direct API call.
+**`history.json`** is committed back to the repo by the Actions workflow after each run; don't edit it by hand. Changing `SEARCH_KEY` starts a fresh history for that search, which means one burst of "new" postings on the next run.
+**`.github/workflows/jobwatch.yml`**: the cron schedule is `0 1 * * *` (01:00 UTC = 6:00 PM Pacific Daylight Time daily). GitHub Actions cron is fixed UTC and doesn't follow DST, so it drifts to 5:00 PM Pacific during Standard Time (roughly Nov–Mar). Uses `workflow_dispatch` for manual triggers.
 
-### AI-driven search (`job_search_ai.py`)
+## Known limitations
 
-`config.yaml`'s per-site keyword matching works well for specific job titles at known
-companies, but it can't do a fuzzy, cross-company *category* search ("Connected Devices,
-Smart TVs, and set-top boxes") — that's not a company to add to the list, and plain substring
-matching on a category name would be far noisier than the title-based matches everywhere
-else. `job_search_ai.py` handles this instead: it calls the Claude API with the
-`web_search_20260209` server-side tool (model `claude-opus-5`, `output_config.effort:
-"medium"` — deliberately below the `high` default to bound cost on a routine daily job; raise
-it if result quality seems thin) and asks it to find current QA/testing postings in that
-space, returning a JSON array of `{company, title, location, url}`.
-
-Rather than build a separate storage/email path, it **reuses `scraper.py`'s existing
-`load_history`/`save_history`/`send_email` helpers directly** (`from scraper import ...`) by
-treating its own results as just another history entry — keyed by the constant
-`SEARCH_KEY = "ai-search:connected-devices-smart-tv-stb"` instead of a real site URL. Same
-new/removed diffing, same email format, no changes needed to `scraper.py` itself.
-
-Runs as an extra step in `jobwatch.yml` right after `python scraper.py`, sharing the same
-daily schedule and the same `history.json` commit at the end (avoids a second cron trigger
-that could race on the same file). The step has `continue-on-error: true` and the commit step
-has `if: always()`, so a failure here (bad API key, JSON the model didn't format as asked,
-rate limit) never blocks the plain scraper's run or its commit.
-
-**Not yet verified against the live API** — built and unit-tested with a stub/no-key dry run
-(2026-09-10) confirming import correctness, the `pause_turn` retry loop shape, and that a
-missing API key fails gracefully (caught exception, no `history.json` write, no crash) rather
-than actually exercising a real `web_search` call end-to-end. First real verification will be
-whichever of (a) a local run with `ANTHROPIC_API_KEY` set, or (b) the first live
-`workflow_dispatch`/scheduled run once the secret is added, happens first. If the model's
-response doesn't parse as JSON (`extract_json_array` raises), the exception is caught and
-logged to stderr — check the Actions log for the raw response text if this happens
-repeatedly, and tighten the prompt if the model is wrapping the array in markdown fences or
-commentary despite being told not to.
-
-**`config.yaml`** — edit this to add/remove sites and keywords. See the platform table above for site-level fields. Any site can also set `exclude_lines` (list of exact-match strings) to permanently ignore specific noise lines that would otherwise keyword-match — use this for boilerplate/widget text that flickers in and out of a page between requests (e.g. an A/B-test marker), which otherwise churns "removed" then "new" on every run since the diff never stabilizes. See Walt Disney Company's entry for a real example (`Disney_WD_English_Test`, confirmed flaky via git history of `history.json`).  
-**`history.json`** — committed back to the repo by the Actions workflow after each run; do not edit manually. History is keyed by `url`, so changing a site's `url` or `platform` resets its history — expect a one-time burst of "new matches" for that site on the next run since previously-seen postings look new again in the changed output format.  
-**`DROPPED-SITES.md`** — companies intentionally removed from `config.yaml` (bot-blocked, low priority, etc.), with reasons, so they don't get silently re-added later.  
-**`.github/workflows/jobwatch.yml`** — cron schedule is `0 1 * * *` (01:00 UTC = 6:00 PM
-Pacific Daylight Time daily). GitHub Actions cron is fixed UTC and doesn't follow DST, so
-this drifts to 5:00 PM Pacific during Standard Time (roughly Nov-Mar) — adjust by an hour
-around the DST transitions if that matters, or leave it as an accepted seasonal drift. Uses
-`workflow_dispatch` for manual triggers.
-
-## Known limitations / future work
-
-- **`platform: playwright` is the fallback for sites with no discoverable public API, OR
-  for sites blocked by TLS-fingerprint WAFs even with a correct API/URL** (see the
-  TLS-fingerprint bullet below) — currently Penn Entertainment (ViziRecruiter), Max (WBD),
-  Pandora (SiriusXM), SAIC, and Amentum. It's meaningfully heavier than the other fetchers —
-  a real headless Chromium launch per site — and the GitHub Actions workflow needs its
-  `playwright install --with-deps chromium` step to have run for it to work at all.
-  Verified with a real local Python + Playwright install (2026-08-12); per-site status for
-  the original three (SAIC and Amentum's specifics are in their own `config.yaml` comments):
-  - **Penn Entertainment** — works well, renders the full listing in one page.
-  - **Max (WBD)** — works, but results are paginated (441 jobs, 10/page). Only the first
-    `playwright_max_pages` (currently 3, i.e. 30 jobs, site's default sort) are fetched —
-    not exhaustive. The "Next" control has no `href`/ARIA role, so pagination is driven by
-    `get_by_text("Next", exact=True)`, not `get_by_role`; if WBD's markup changes, re-verify
-    that selector still finds it before trusting silence as "no more pages."
-  - **Pandora (SiriusXM)** — only page 1 (10 of 66 jobs) is reachable. Its pagination
-    control isn't exposed as visible text or an ARIA name our generic clicker can find
-    (probably shadow DOM) — didn't chase this further. Accepted as-is per user request.
-  - **Crunchyroll was tried and dropped** (see `DROPPED-SITES.md`) — blocked by a
-    Cloudflare Turnstile bot-verification challenge even through Playwright. Not worth
-    engineering a bypass for a personal script.
-- **`matching_lines()` does plain substring matching**, not word-boundary matching — e.g.
-  the keyword `Test` matches inside `latest`. This is a known source of false-positive
-  matches (confirmed in `history.json`) and hasn't been fixed yet.
-- **Leidos** (`careers.leidos.com`) is blocked by Cloudflare (403) on every URL tried so
-  far. Left in `config.yaml` as a known-dead entry (not `DROPPED-SITES.md`) because there's
-  existing history worth keeping — it just won't ever produce new matches until unblocked
-  some other way.
-- **Workday's job-search API rejects `limit` > 20 with an HTTP 400** (no useful error
-  message body — just `{"errorCode":"HTTP_400", ...}`). Found this the hard way by actually
-  running `fetch_lines_workday` against Cerence's API with `limit=50`; confirmed the exact
-  cutoff (20 works, 25 doesn't) by bisecting with `curl`. `fetch_lines_workday` now hardcodes
-  `limit = 20` — don't raise it without reconfirming against a live tenant first.
-- **Some 403s are a TLS-fingerprint block, not a missing-header problem** — discovered on
-  SAIC: `requests.get()` got a 403 even with a full browser `User-Agent` header, while the
-  exact same URL via `curl` (with or without a UA) succeeded, and Playwright (a real browser
-  TLS stack) also succeeded. The WAF is fingerprinting the TLS handshake itself
-  (JA3/JA4-style), not just checking headers - so no amount of header-spoofing in
-  `requests` fixes it; only a real browser engine does. SAIC's `platform` is now
-  `playwright` because of this. A full-config dry run (2026-08-12) turned up several other
-  sites failing with plain 403/404 that weren't touched this session and may have the same
-  root cause: Sportradar, Plex, Conviva, Wurl, Zendesk, GlobalStep (403s - worth checking if
-  they're TLS-fingerprint blocks too), and Audible, Innovid, FX Digital, QAwerk, Witbe
-  (404s - likely just stale URLs, same class of bug as the original Tubi/iHeartMedia/etc.
-  fixes). Not fixed here since they're outside what was asked this session - flagging for
-  a future pass.
-- **Several defense-contractor entries are filtered to Washington/JBLM specifically**
-  (SAIC, GDIT, Peraton, CACI, Amentum, Akima) — user is local to Joint Base Lewis-McChord
-  and wants on-site/hybrid roles there over a nationwide feed. Each site's filtering
-  mechanism (or why it couldn't be filtered) is documented inline as a YAML comment next to
-  that site in `config.yaml` rather than duplicated here — check there first. Booz Allen,
-  ManTech, Accenture Federal, and Serco stayed unfiltered/nationwide (Taleo autocomplete
-  widgets and Accenture's search both resisted reasonable effort to filter; Serco's Phenom
-  instance doesn't expose the endpoint CACI's does). If you add more defense-contractor
-  sites later, keep the same bar: verify a real filtered result via `curl`/API before trusting
-  a query-string guess — see e.g. Amentum's config comment, where a plausible-looking
-  pre-filtered URL silently returned 0 results and a broader one had to be used instead.
+- Results aren't deterministic: the same posting can drop out of one run and come back in the next, which gets reported as "new" again. If that churn gets noisy, a fix is to stop removing postings that are missing from just one run (e.g. only drop them after N consecutive misses).
+- The model is told to include only postings with a real URL, but nothing checks the URLs. Hallucinated or stale links are possible.
 
 ## GitHub Secrets Required
 
 | Secret | Description |
 |---|---|
+| `ANTHROPIC_API_KEY` | Claude API key |
 | `SMTP_HOST` | SMTP server hostname |
 | `SMTP_PORT` | SMTP port (typically `587`) |
 | `SMTP_USER` | SMTP login username |
 | `SMTP_PASSWORD` | SMTP password or app password |
 | `EMAIL_FROM` | Sender address |
 | `EMAIL_TO` | Recipient address |
-| `ANTHROPIC_API_KEY` | Claude API key, used only by `job_search_ai.py` |

@@ -1,13 +1,17 @@
 import json
+import os
 import re
+import smtplib
 import sys
+from datetime import date
+from email.mime.text import MIMEText
 
 import anthropic
 
-from scraper import load_history, save_history, send_email
+HISTORY_FILE = "history.json"
 
-# Not a real site URL - just a stable key so this reuses the same
-# load/diff/save history mechanism as every entry in config.yaml.
+# Not a URL - just a stable key for this search's entry in history.json, so
+# more searches can be added later without sharing one list.
 SEARCH_KEY = "ai-search:connected-devices-smart-tv-stb"
 
 PROMPT = """Search the web for current QA, software testing, and quality assurance job \
@@ -27,6 +31,48 @@ memory - only include postings you can point to a real URL for.
 Respond with ONLY a JSON array (no other text before or after it) of objects with these \
 exact keys: "company", "title", "location", "url". If you find no relevant postings, \
 respond with an empty array: []"""
+
+
+def load_history():
+    try:
+        with open(HISTORY_FILE) as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+
+def save_history(history):
+    with open(HISTORY_FILE, "w") as f:
+        json.dump(history, f, indent=2)
+        f.write("\n")
+
+
+def send_email(new_lines):
+    host = os.environ["SMTP_HOST"]
+    port = int(os.environ["SMTP_PORT"])
+    user = os.environ["SMTP_USER"]
+    password = os.environ["SMTP_PASSWORD"]
+    email_from = os.environ["EMAIL_FROM"]
+    email_to = os.environ["EMAIL_TO"]
+
+    lines = ["New postings found:\n", "Connected Devices / Smart TV / STB QA Search (AI)"]
+    for line in new_lines:
+        lines.append(f"  - {line}")
+
+    body = "\n".join(lines).strip()
+    subject = f"[jobwatch-AI-python] New postings found — {date.today()}"
+
+    msg = MIMEText(body)
+    msg["Subject"] = subject
+    msg["From"] = email_from
+    msg["To"] = email_to
+
+    with smtplib.SMTP(host, port) as smtp:
+        smtp.starttls()
+        smtp.login(user, password)
+        smtp.sendmail(email_from, [email_to], msg.as_string())
+
+    print(f"Email sent to {email_to}")
 
 
 def extract_json_array(text):
@@ -65,8 +111,9 @@ def main():
     try:
         jobs = search_jobs(client)
     except Exception as e:
+        # Leave history.json untouched, but fail the run so it shows up red in Actions.
         print(f"ERROR searching for jobs: {e}", file=sys.stderr)
-        return
+        sys.exit(1)
 
     current_matches = {
         f"{job['company']} - {job['title']} ({job['location']}) - {job['url']}"
@@ -89,9 +136,7 @@ def main():
     print("History saved.")
 
     if new_lines:
-        send_email(
-            [("Connected Devices / Smart TV / STB QA Search (AI)", "n/a", new_lines)]
-        )
+        send_email(new_lines)
     else:
         print("No new matches - no email sent.")
 
