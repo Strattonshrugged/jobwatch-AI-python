@@ -1,5 +1,19 @@
 {
   "ai-search:connected-devices-smart-tv-stb": {
+    "dated:comcast xumo:sr manager qa engineering xumo:philadelphia pa united states:2026 05 26": {
+      "company": "Comcast (Xumo)",
+      "title": "Sr. Manager, QA Engineering-Xumo",
+      "location": "Philadelphia, PA, United States",
+      "url": "https://jobs.comcast.com/category/quality-assurance-jobs/45483/8707664/1",
+      "requisition_id": null,
+      "posted_date": "2026-05-26",
+      "first_seen": "2026-10-08",
+      "match_keys": [
+        "dated:comcast xumo:sr manager qa engineering xumo:philadelphia pa united states:2026 05 26",
+        "url:https://jobs.comcast.com/category/quality-assurance-jobs/45483/8707664/1"
+      ],
+      "last_seen": "2026-10-08"
+    },
     "dated:roku:senior software engineer in test python:cambridge england united kingdom:2026 03 13": {
       "company": "Roku",
       "title": "Senior Software Engineer in Test, Python",
@@ -14,6 +28,71 @@
       ],
       "last_seen": "2026-10-07"
     },
+    "req:comcast:r441166": {
+      "company": "Comcast",
+      "title": "Quality Assurance Engineer",
+      "location": "Philadelphia, Pennsylvania, United States",
+      "url": "https://jobs.comcast.com/job/philadelphia/quality-assurance-engineer/45483/98432440752",
+      "requisition_id": "R441166",
+      "posted_date": "2026-07-28",
+      "first_seen": "2026-10-08",
+      "match_keys": [
+        "req:comcast:r441166"
+      ],
+      "last_seen": "2026-10-08"
+    },
+    "req:roku:10711": {
+      "company": "Roku",
+      "title": "Senior Quality Assurance Engineer",
+      "location": "Shanghai, China",
+      "url": "https://www.weareroku.com/jobs/senior-quality-assurance-engineer-shanghai-china",
+      "requisition_id": "10711",
+      "posted_date": null,
+      "first_seen": "2026-10-08",
+      "match_keys": [
+        "req:roku:10711"
+      ],
+      "last_seen": "2026-10-08"
+    },
+    "req:roku:10742": {
+      "company": "Roku",
+      "title": "Senior Quality Assurance Engineer, Workday",
+      "location": "Bengaluru, Karnataka, India",
+      "url": "https://www.weareroku.com/jobs/senior-quality-assurance-engineer-workday-bengaluru-karnataka-india",
+      "requisition_id": "10742",
+      "posted_date": null,
+      "first_seen": "2026-10-08",
+      "match_keys": [
+        "req:roku:10742"
+      ],
+      "last_seen": "2026-10-08"
+    },
+    "req:roku:8120": {
+      "company": "Roku",
+      "title": "Engineering Student Intern \u2013 QA Automated Test",
+      "location": "Aarhus, Denmark",
+      "url": "https://www.weareroku.com/jobs/engineering-student-intern-qa-automated-test-aarhus-denmark-261bde1f-a360-4329-9812-758709586821",
+      "requisition_id": "8120",
+      "posted_date": null,
+      "first_seen": "2026-10-08",
+      "match_keys": [
+        "req:roku:8120"
+      ],
+      "last_seen": "2026-10-08"
+    },
+    "url:https://jobs.comcast.com/job/downingtown/mobile-sdet/45483/74730637168": {
+      "company": "Comcast",
+      "title": "Mobile SDET (Player Platform QA \u2013 X1 set-top boxes / Xfinity Stream)",
+      "location": "Downingtown, PA, United States",
+      "url": "https://jobs.comcast.com/job/downingtown/mobile-sdet/45483/74730637168",
+      "requisition_id": null,
+      "posted_date": null,
+      "first_seen": "2026-10-08",
+      "match_keys": [
+        "url:https://jobs.comcast.com/job/downingtown/mobile-sdet/45483/74730637168"
+      ],
+      "last_seen": "2026-10-08"
+    },
     "url:https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-fire-tv-devices": {
       "company": "Amazon (Fire TV)",
       "title": "Quality Assurance Engineer, Fire TV Devices",
@@ -25,7 +104,20 @@
       "match_keys": [
         "url:https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-fire-tv-devices"
       ],
-      "last_seen": "2026-10-07"
+      "last_seen": "2026-10-08"
+    },
+    "url:https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-ftvx-team-whole-world": {
+      "company": "Amazon",
+      "title": "Quality Assurance Engineer, FTVX Team (Whole World)",
+      "location": "",
+      "url": "https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-ftvx-team-whole-world/",
+      "requisition_id": null,
+      "posted_date": null,
+      "first_seen": "2026-10-08",
+      "match_keys": [
+        "url:https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-ftvx-team-whole-world"
+      ],
+      "last_seen": "2026-10-08"
     },
     "url:https://www.jointaro.com/jobs/amazon/software-engineer-in-test-firetv": {
       "company": "Amazon (Fire TV)",
