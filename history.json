@@ -1,5 +1,19 @@
 {
   "ai-search:connected-devices-smart-tv-stb": {
+    "dated:a1 group a1 bulgaria:qa engineer manual smart tv solutions:bulgaria:2026 07 31": {
+      "company": "A1 Group (A1 Bulgaria)",
+      "title": "QA Engineer - Manual (Smart TV Solutions)",
+      "location": "Bulgaria",
+      "url": "https://freehire.me/jobs/qa-engineer-manual-smart-tv-solutions-a1group-do5l7hjw",
+      "requisition_id": null,
+      "posted_date": "2026-07-31",
+      "first_seen": "2026-10-09",
+      "match_keys": [
+        "dated:a1 group a1 bulgaria:qa engineer manual smart tv solutions:bulgaria:2026 07 31",
+        "url:https://freehire.me/jobs/qa-engineer-manual-smart-tv-solutions-a1group-do5l7hjw"
+      ],
+      "last_seen": "2026-10-09"
+    },
     "dated:comcast xumo:sr manager qa engineering xumo:philadelphia pa united states:2026 05 26": {
       "company": "Comcast (Xumo)",
       "title": "Sr. Manager, QA Engineering-Xumo",
@@ -28,6 +42,32 @@
       ],
       "last_seen": "2026-10-07"
     },
+    "req:5v video:quality assurance engineer manual connected tv 1": {
+      "company": "5V Video",
+      "title": "Quality Assurance Engineer - Manual Connected TV",
+      "location": "Fully Remote",
+      "url": "https://www.weare5vvideo.com/job/quality-assurance-engineer---manual-connected-tv-1",
+      "requisition_id": "Quality Assurance Engineer - Manual Connected TV-1",
+      "posted_date": "2026-05-22",
+      "first_seen": "2026-10-09",
+      "match_keys": [
+        "req:5v video:quality assurance engineer manual connected tv 1"
+      ],
+      "last_seen": "2026-10-09"
+    },
+    "req:comcast:r432017": {
+      "company": "Comcast",
+      "title": "Engineer 2, Quality Assurance N-E004581-0074-CTR",
+      "location": "Chennai, India",
+      "url": "https://jobs.comcast.com/job/chennai/engineer-2-quality-assurance-n-e004581-0074-ctr/45483/92295075136",
+      "requisition_id": "R432017",
+      "posted_date": "2026-03-02",
+      "first_seen": "2026-10-09",
+      "match_keys": [
+        "req:comcast:r432017"
+      ],
+      "last_seen": "2026-10-09"
+    },
     "req:comcast:r441166": {
       "company": "Comcast",
       "title": "Quality Assurance Engineer",
@@ -39,7 +79,46 @@
       "match_keys": [
         "req:comcast:r441166"
       ],
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-10-09"
+    },
+    "req:globallogic:irc280971": {
+      "company": "GlobalLogic",
+      "title": "QA Engineer (Smart TV & Set-Top-Box Testing)",
+      "location": "Bogota, Colombia",
+      "url": "https://www.globallogic.com/latam/careers/qa-engineer-smart-tv-set-top-box-testing-irc280971/",
+      "requisition_id": "IRC280971",
+      "posted_date": "2025-12-12",
+      "first_seen": "2026-10-09",
+      "match_keys": [
+        "req:globallogic:irc280971"
+      ],
+      "last_seen": "2026-10-09"
+    },
+    "req:globallogic:irc301927": {
+      "company": "GlobalLogic",
+      "title": "QA Engineer \u2013 Smart TV & Set-Top Box",
+      "location": "Bangalore, India (Hybrid)",
+      "url": "https://www.globallogic.com/careers/qa-engineer-smart-tv-set-top-box-irc301927/",
+      "requisition_id": "IRC301927",
+      "posted_date": "2026-08-21",
+      "first_seen": "2026-10-09",
+      "match_keys": [
+        "req:globallogic:irc301927"
+      ],
+      "last_seen": "2026-10-09"
+    },
+    "req:globallogic:irc304216": {
+      "company": "GlobalLogic",
+      "title": "QA Engineer \u2013 Smart TV & Set-Top Box",
+      "location": "Bangalore, India (Hybrid)",
+      "url": "https://www.globallogic.com/careers/qa-engineer-smart-tv-set-top-box-irc304216/",
+      "requisition_id": "IRC304216",
+      "posted_date": "2026-09-10",
+      "first_seen": "2026-10-09",
+      "match_keys": [
+        "req:globallogic:irc304216"
+      ],
+      "last_seen": "2026-10-09"
     },
     "req:roku:10711": {
       "company": "Roku",
@@ -52,7 +131,7 @@
       "match_keys": [
         "req:roku:10711"
       ],
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-10-09"
     },
     "req:roku:10742": {
       "company": "Roku",
@@ -66,6 +145,19 @@
         "req:roku:10742"
       ],
       "last_seen": "2026-10-08"
+    },
+    "req:roku:11404": {
+      "company": "Roku",
+      "title": "Senior Quality Assurance Engineer, Smart TV",
+      "location": "Shenzhen, Guangdong, China",
+      "url": "https://www.weareroku.com/jobs/senior-quality-assurance-engineer-smart-tv-shenzhen-guangdong-china",
+      "requisition_id": "11404",
+      "posted_date": null,
+      "first_seen": "2026-10-09",
+      "match_keys": [
+        "req:roku:11404"
+      ],
+      "last_seen": "2026-10-09"
     },
     "req:roku:8120": {
       "company": "Roku",
