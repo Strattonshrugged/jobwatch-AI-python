@@ -42,6 +42,32 @@
       ],
       "last_seen": "2026-10-07"
     },
+    "req:5v video recruiter client not named:quality assurance engineer 2": {
+      "company": "5V Video (recruiter; client not named)",
+      "title": "QA Engineer \u2013 Connected TV & Mobile Applications",
+      "location": "Fully Remote, United States",
+      "url": "https://www.weare5vvideo.com/job/quality-assurance-engineer-4",
+      "requisition_id": "Quality Assurance Engineer-2",
+      "posted_date": null,
+      "first_seen": "2026-10-10",
+      "match_keys": [
+        "req:5v video recruiter client not named:quality assurance engineer 2"
+      ],
+      "last_seen": "2026-10-10"
+    },
+    "req:5v video recruiter client not named:quality assurance engineer manual connected tv 1": {
+      "company": "5V Video (recruiter; client not named)",
+      "title": "Quality Assurance Engineer - Manual Connected TV (Contract)",
+      "location": "Fully Remote",
+      "url": "https://www.weare5vvideo.com/job/quality-assurance-engineer---manual-connected-tv-1",
+      "requisition_id": "Quality Assurance Engineer - Manual Connected TV-1",
+      "posted_date": "2026-05-22",
+      "first_seen": "2026-10-10",
+      "match_keys": [
+        "req:5v video recruiter client not named:quality assurance engineer manual connected tv 1"
+      ],
+      "last_seen": "2026-10-10"
+    },
     "req:5v video:quality assurance engineer manual connected tv 1": {
       "company": "5V Video",
       "title": "Quality Assurance Engineer - Manual Connected TV",
@@ -54,6 +80,19 @@
         "req:5v video:quality assurance engineer manual connected tv 1"
       ],
       "last_seen": "2026-10-09"
+    },
+    "req:comcast xumo:r431019": {
+      "company": "Comcast (Xumo)",
+      "title": "Video QA Engineer - Onsite - Irvine, CA - Xumo",
+      "location": "Irvine, California, USA",
+      "url": "https://jobs.comcast.com/job/irvine/video-qa-engineer-onsite-irvine-ca-xumo/45483/92426068448",
+      "requisition_id": "R431019",
+      "posted_date": "2026-03-19",
+      "first_seen": "2026-10-10",
+      "match_keys": [
+        "req:comcast xumo:r431019"
+      ],
+      "last_seen": "2026-10-10"
     },
     "req:comcast:r432017": {
       "company": "Comcast",
@@ -185,6 +224,32 @@
       ],
       "last_seen": "2026-10-08"
     },
+    "url:https://startup.jobs/senior-quality-assurance-engineer-roku-7448353": {
+      "company": "Roku",
+      "title": "Senior Quality Assurance Engineer",
+      "location": "Shanghai, China",
+      "url": "https://startup.jobs/senior-quality-assurance-engineer-roku-7448353",
+      "requisition_id": null,
+      "posted_date": null,
+      "first_seen": "2026-10-10",
+      "match_keys": [
+        "url:https://startup.jobs/senior-quality-assurance-engineer-roku-7448353"
+      ],
+      "last_seen": "2026-10-10"
+    },
+    "url:https://www.glassdoor.com/job/qa-engineer-tv-streaming-devices-jobs-srch_ko0,32.htm": {
+      "company": "Angel Studios",
+      "title": "Senior SDET / QA Engineer (Smart TV)",
+      "location": "",
+      "url": "https://www.glassdoor.com/Job/qa-engineer-tv-streaming-devices-jobs-SRCH_KO0,32.htm",
+      "requisition_id": null,
+      "posted_date": null,
+      "first_seen": "2026-10-10",
+      "match_keys": [
+        "url:https://www.glassdoor.com/job/qa-engineer-tv-streaming-devices-jobs-srch_ko0,32.htm"
+      ],
+      "last_seen": "2026-10-10"
+    },
     "url:https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-fire-tv-devices": {
       "company": "Amazon (Fire TV)",
       "title": "Quality Assurance Engineer, Fire TV Devices",
@@ -196,7 +261,7 @@
       "match_keys": [
         "url:https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-fire-tv-devices"
       ],
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-10-10"
     },
     "url:https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-ftvx-team-whole-world": {
       "company": "Amazon",
@@ -223,6 +288,19 @@
         "url:https://www.jointaro.com/jobs/amazon/software-engineer-in-test-firetv"
       ],
       "last_seen": "2026-10-07"
+    },
+    "url:https://www.tataelxsi.com/careers/job-openings/ott-and-stb-test-engineer": {
+      "company": "Tata Elxsi",
+      "title": "OTT and STB Test Engineer",
+      "location": "",
+      "url": "https://www.tataelxsi.com/careers/job-openings/ott-and-stb-test-engineer",
+      "requisition_id": null,
+      "posted_date": null,
+      "first_seen": "2026-10-10",
+      "match_keys": [
+        "url:https://www.tataelxsi.com/careers/job-openings/ott-and-stb-test-engineer"
+      ],
+      "last_seen": "2026-10-10"
     },
     "url:https://www.weareroku.com/jobs/senior-quality-assurance-engineer-shanghai-china": {
       "company": "Roku",
