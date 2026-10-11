@@ -12,7 +12,7 @@
         "dated:a1 group a1 bulgaria:qa engineer manual smart tv solutions:bulgaria:2026 07 31",
         "url:https://freehire.me/jobs/qa-engineer-manual-smart-tv-solutions-a1group-do5l7hjw"
       ],
-      "last_seen": "2026-10-09"
+      "last_seen": "2026-10-11"
     },
     "dated:comcast xumo:sr manager qa engineering xumo:philadelphia pa united states:2026 05 26": {
       "company": "Comcast (Xumo)",
@@ -79,7 +79,7 @@
       "match_keys": [
         "req:5v video:quality assurance engineer manual connected tv 1"
       ],
-      "last_seen": "2026-10-09"
+      "last_seen": "2026-10-11"
     },
     "req:comcast xumo:r431019": {
       "company": "Comcast (Xumo)",
@@ -92,7 +92,7 @@
       "match_keys": [
         "req:comcast xumo:r431019"
       ],
-      "last_seen": "2026-10-10"
+      "last_seen": "2026-10-11"
     },
     "req:comcast:r432017": {
       "company": "Comcast",
@@ -120,6 +120,19 @@
       ],
       "last_seen": "2026-10-09"
     },
+    "req:fox fox one:r50033156": {
+      "company": "Fox Corporation (FOX One)",
+      "title": "Staff SDET",
+      "location": "Los Angeles, California; New York, New York; Tempe, Arizona (Hybrid)",
+      "url": "https://www.foxcareers.com/Search/JobDetail/R50033156/staff-sdet-fox-corporation?pageLanguage=en-US",
+      "requisition_id": "R50033156",
+      "posted_date": "2026-07-17",
+      "first_seen": "2026-10-11",
+      "match_keys": [
+        "req:fox fox one:r50033156"
+      ],
+      "last_seen": "2026-10-11"
+    },
     "req:globallogic:irc280971": {
       "company": "GlobalLogic",
       "title": "QA Engineer (Smart TV & Set-Top-Box Testing)",
@@ -131,7 +144,7 @@
       "match_keys": [
         "req:globallogic:irc280971"
       ],
-      "last_seen": "2026-10-09"
+      "last_seen": "2026-10-11"
     },
     "req:globallogic:irc301927": {
       "company": "GlobalLogic",
@@ -144,7 +157,7 @@
       "match_keys": [
         "req:globallogic:irc301927"
       ],
-      "last_seen": "2026-10-09"
+      "last_seen": "2026-10-11"
     },
     "req:globallogic:irc304216": {
       "company": "GlobalLogic",
@@ -157,7 +170,7 @@
       "match_keys": [
         "req:globallogic:irc304216"
       ],
-      "last_seen": "2026-10-09"
+      "last_seen": "2026-10-11"
     },
     "req:roku:10711": {
       "company": "Roku",
@@ -170,7 +183,7 @@
       "match_keys": [
         "req:roku:10711"
       ],
-      "last_seen": "2026-10-09"
+      "last_seen": "2026-10-11"
     },
     "req:roku:10742": {
       "company": "Roku",
@@ -196,7 +209,7 @@
       "match_keys": [
         "req:roku:11404"
       ],
-      "last_seen": "2026-10-09"
+      "last_seen": "2026-10-11"
     },
     "req:roku:8120": {
       "company": "Roku",
@@ -261,7 +274,7 @@
       "match_keys": [
         "url:https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-fire-tv-devices"
       ],
-      "last_seen": "2026-10-10"
+      "last_seen": "2026-10-11"
     },
     "url:https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-ftvx-team-whole-world": {
       "company": "Amazon",
@@ -275,6 +288,19 @@
         "url:https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-ftvx-team-whole-world"
       ],
       "last_seen": "2026-10-08"
+    },
+    "url:https://www.jointaro.com/jobs/amazon/sdet-ii-vega-tv": {
+      "company": "Amazon (Fire TV)",
+      "title": "SDET II, Vega TV",
+      "location": "",
+      "url": "https://www.jointaro.com/jobs/amazon/sdet-ii-vega-tv/",
+      "requisition_id": null,
+      "posted_date": null,
+      "first_seen": "2026-10-11",
+      "match_keys": [
+        "url:https://www.jointaro.com/jobs/amazon/sdet-ii-vega-tv"
+      ],
+      "last_seen": "2026-10-11"
     },
     "url:https://www.jointaro.com/jobs/amazon/software-engineer-in-test-firetv": {
       "company": "Amazon (Fire TV)",
