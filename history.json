@@ -92,7 +92,7 @@
       "match_keys": [
         "req:comcast xumo:r431019"
       ],
-      "last_seen": "2026-10-11"
+      "last_seen": "2026-10-12"
     },
     "req:comcast:r432017": {
       "company": "Comcast",
@@ -224,6 +224,19 @@
       ],
       "last_seen": "2026-10-08"
     },
+    "url:https://builtin.com/job/sr-qa-engineer-xumo/3506026": {
+      "company": "Comcast (Xumo)",
+      "title": "Sr QA Engineer-Xumo",
+      "location": "",
+      "url": "https://builtin.com/job/sr-qa-engineer-xumo/3506026",
+      "requisition_id": null,
+      "posted_date": null,
+      "first_seen": "2026-10-12",
+      "match_keys": [
+        "url:https://builtin.com/job/sr-qa-engineer-xumo/3506026"
+      ],
+      "last_seen": "2026-10-12"
+    },
     "url:https://jobs.comcast.com/job/downingtown/mobile-sdet/45483/74730637168": {
       "company": "Comcast",
       "title": "Mobile SDET (Player Platform QA \u2013 X1 set-top boxes / Xfinity Stream)",
@@ -248,7 +261,7 @@
       "match_keys": [
         "url:https://startup.jobs/senior-quality-assurance-engineer-roku-7448353"
       ],
-      "last_seen": "2026-10-10"
+      "last_seen": "2026-10-12"
     },
     "url:https://www.glassdoor.com/job/qa-engineer-tv-streaming-devices-jobs-srch_ko0,32.htm": {
       "company": "Angel Studios",
@@ -274,7 +287,7 @@
       "match_keys": [
         "url:https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-fire-tv-devices"
       ],
-      "last_seen": "2026-10-11"
+      "last_seen": "2026-10-12"
     },
     "url:https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-ftvx-team-whole-world": {
       "company": "Amazon",
@@ -287,7 +300,7 @@
       "match_keys": [
         "url:https://www.jointaro.com/jobs/amazon/quality-assurance-engineer-ftvx-team-whole-world"
       ],
-      "last_seen": "2026-10-08"
+      "last_seen": "2026-10-12"
     },
     "url:https://www.jointaro.com/jobs/amazon/sdet-ii-vega-tv": {
       "company": "Amazon (Fire TV)",
